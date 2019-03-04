@@ -2,7 +2,9 @@ body, html {
   padding: 0px;
   margin: 0px;
   background-color: #fefefe;
-  --theme-color-one: #ff9800;
+  --tc-main: #673AB7;
+  --tc-optional: #512DA8;
+  --tc-accent: #2196F3;
 }
 
 #appWrapper {
@@ -40,7 +42,7 @@ div#canvasDiv {
 
 ._btn {
   padding: 10px 12px;
-  background-color: var(--theme-color-one) ;
+  background-color: var(--tc-main) ;
   color: white;
   font-family: sans-serif;
   font-size: 17px;
@@ -51,6 +53,12 @@ div#canvasDiv {
   box-shadow: 1px 2px 20px #ededed;
   cursor: pointer;
   text-align: center;
+}
+
+._btn:disabled {
+  background-color: #eee;
+  color: #222;
+  cursor: not-allowed;
 }
 
 #editDiv > input[type=file] {

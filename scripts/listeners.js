@@ -22,6 +22,7 @@ uploadButton.addEventListener("change", e => {
   reader.onload = function({ target: { result } }) {
     const img = new Image();
     img.onload = () => {
+      activate();
       reset();
       imageUploaded = true;
       imgPos = {
@@ -59,10 +60,23 @@ blurSlider.addEventListener("mouseup", e => {
   })
 });
 
+////////////////////////////////////////////////////
+
+const saveNProceed = document.querySelector("button#save");
+
+
 /////////////////////////////////
 
 
 function reset() {
   blurSlider.value = blurSlider.min;
   brightSlider.value = 0;
+}
+
+function activate() {
+  blurSlider.disabled = false;
+  blurSlider.classList.remove("disabled");
+  brightSlider.disabled = false;
+  brightSlider.classList.remove("disabled");
+  saveNProceed.disabled = false;
 }

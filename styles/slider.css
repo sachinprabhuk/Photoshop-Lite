@@ -9,7 +9,6 @@
   opacity: 0.6;
   -webkit-transition: .2s;
   transition: opacity .2s;
-  --thumb-color: #fb8c00  ;
 }
 
 .slider::-webkit-slider-thumb {
@@ -18,8 +17,13 @@
   width: 15px;
   height: 15px;
   border-radius: 50%; 
-  background: var(--thumb-color);
+  background: var(--tc-optional);
   cursor: pointer;
+}
+
+.slider.disabled::-webkit-slider-thumb {
+  background: #ddd;
+  cursor: not-allowed;
 }
 
 .slider::-moz-range-thumb {
