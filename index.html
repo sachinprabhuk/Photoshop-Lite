@@ -14,7 +14,7 @@
       <canvas width="980px" height="600px"></canvas>
     </div>
     <div id="editDiv">
-      <input type="file" id="upload">
+      <input type="file" id="upload" accept="image/*">
       <div id="main">
         <label class="_btn" for="upload">Upload image</label>
         <button id="save" class="_btn">Save n continue</button>
@@ -25,9 +25,9 @@
         min="-50" max="50" value="0">
       </div>
       <div class="feature">
-        <h3 class="name">Contrast</h3>
-        <input type="range" class="slider" id="contrast"
-        min="-50" max="50" value="0">
+        <h3 class="name">Blur</h3>
+        <input type="range" class="slider" id="_blur"
+        min="3" max="13" value="3" step="2">
       </div>
     </div>
   </div>

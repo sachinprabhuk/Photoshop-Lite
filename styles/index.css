@@ -23,11 +23,11 @@ div#canvasDiv {
 }
 
 .feature {
-  margin: 16px 0px 0px 0px;
+  margin: 20px 0px 0px 0px;
 }
 
 .feature .name {
-  margin: 4px 0px 10px 3px;
+  margin: 4px 0px 0px 3px;
   color: #666;
   font-size: 18px;
 }

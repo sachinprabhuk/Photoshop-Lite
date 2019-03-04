@@ -5,4 +5,3 @@ const ctx = canvas.getContext("2d");
 let imgPos = null;
 let imageData = null;
 ////////////////////////////////
-
