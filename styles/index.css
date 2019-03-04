@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+  
 body, html {
   padding: 0px;
   margin: 0px;
@@ -11,7 +13,7 @@ body, html {
   padding: 10px 20px;
   display: grid;
   grid-template-columns: 980px auto;
-  grid-column-gap: 20px;
+  grid-column-gap: 25px;
 }
 
 canvas {
@@ -25,13 +27,13 @@ div#canvasDiv {
 }
 
 .feature {
-  margin: 20px 0px 0px 0px;
+  margin: 18px 0px 0px 0px;
 }
 
 .feature .name {
   margin: 4px 0px 0px 3px;
   color: #666;
-  font-size: 18px;
+  font-size: 17px;
 }
 
 #editDiv > #main {
@@ -63,4 +65,40 @@ div#canvasDiv {
 
 #editDiv > input[type=file] {
   display: none;
+}
+
+.toast {
+  position: fixed;
+  transition: all 0.4s ease-in-out;
+  bottom: -100px;
+  padding: 12px 20px;
+  background-color: #373737;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  left: 30px;
+  font-family: 'Roboto', sans-serif;
+  word-spacing: 2px;
+  border-radius: 3px;
+}
+
+.toast.active {
+  bottom: 40px;
+}
+
+.toast button {
+  margin-left: 14px;
+  border-radius: 50%;
+  padding: 10px;
+  border: none;
+  outline: none;
+  color: var(--tc-accent);
+  background-color: transparent;
+  box-shadow: 0px 0px 8px #5d5d5d;
+  width: 30px;
+  height: 30px;
+  line-height: 10px;
+  font-size: 17px;
+  text-align: center;
+  cursor: pointer;
 }

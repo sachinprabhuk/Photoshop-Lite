@@ -10,7 +10,6 @@ brightSlider.addEventListener("mouseup", e => {
     imgData: imageData,
     bright: e.target.value
   });
-
 });
 
 ///////////////////////////////////////////////////////////
@@ -63,6 +62,14 @@ blurSlider.addEventListener("mouseup", e => {
 ////////////////////////////////////////////////////
 
 const saveNProceed = document.querySelector("button#save");
+saveNProceed.addEventListener("click", e => {
+  imageData = ctx.getImageData(
+    imgPos.x, imgPos.y, 
+    imageData.width, imageData.height
+  );
+  reset();
+  new Toast("Image saved!! Continue editing.", 3000);
+})
 
 
 /////////////////////////////////

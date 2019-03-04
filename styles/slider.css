@@ -26,6 +26,10 @@
   cursor: not-allowed;
 }
 
+.slider.disabled {
+  cursor: not-allowed;
+}
+
 .slider::-moz-range-thumb {
   width: 15px;
   height: 15px;
