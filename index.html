@@ -6,6 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="/styles/index.css">
   <link rel="stylesheet" href="/styles/slider.css">
+  <link rel="stylesheet" href="/styles/accordion.css">
+
   <title>Photoshop Lite</title>
 </head>
 <body>
@@ -19,16 +21,78 @@
         <label class="_btn" for="upload">Upload image</label>
         <button disabled id="save" class="_btn" disabled>Save n continue</button>
       </div>
-      <div class="feature">
-        <h3 class="name">brightness</h3>
-        <input type="range" class="slider disabled" id="bright"
-        min="-50" max="50" value="0" disabled>
-      </div>
-      <div class="feature">
-        <h3 class="name">blur</h3>
-        <input type="range" class="slider disabled" id="_blur"
-        min="3" max="13" value="3" step="2" disabled>
-      </div>
+      <!------------------------------------------------------>
+      <ul class="accordion">
+        <li>
+          <div class="head">
+            Basic
+          </div>
+          <div class="body">
+            <div class="forMargin">
+              <div class="feature">
+                <h3 class="name">brightness</h3>
+                <input type="range" class="slider disabled" id="bright"
+                min="-50" max="50" value="0" disabled>
+              </div>
+              <div class="feature">
+                <h3 class="name">blur</h3>
+                <input type="range" class="slider disabled" id="_blur"
+                min="3" max="13" value="3" step="2" disabled>
+              </div>
+              <div class="feature check_div">
+                <input type="checkbox" name="toGray" id="toGray" disabled>
+                <label for="toGray">To Gray Scale</label>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="head">
+            Edge detection
+          </div>
+          <div class="body">
+            <div class="forMargin">
+              
+              <ul>
+                <li>item 1</li>
+              <li>item 2</li>
+              <li>item 3</li>
+              </ul>
+            </div>
+          </div>
+          </li>
+        <li>
+          <div class="head">
+            Filters
+          </div>
+          <div class="body">
+            <div class="forMargin">
+              <ul>
+                <li>item 1</li>
+                <li>item 2</li>
+                <li>item 3</li>
+                <li>item 4</li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="head">
+            Segmentation
+          </div>
+          <div class="body">
+            <div class="forMargin">
+              <ul>
+                <li>dafa</li>
+                <li>sadfa</li>
+                <li>adsfad</li>
+                <li>adsfadf</li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+      
     </div>
   </div>
   
@@ -36,4 +100,5 @@
 <script src="/scripts/toast.js"></script>
 <script src="/scripts/index.js"></script>
 <script src="/scripts/listeners.js"></script>
+<script src="/scripts/accordion.js"></script>
 </html>

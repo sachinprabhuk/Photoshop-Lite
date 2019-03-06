@@ -1,6 +1,6 @@
-const brightSlider = document.querySelector("input[type='range']#bright");
-
-brightSlider.addEventListener("mouseup", e => {
+controls.basic.brightSlider.addEventListener("mouseup", e => {
+  lastUsedElement && lastUsedElement!=e.target && lastUsedElement.reset();
+  lastUsedElement = e.target;
   const worker = new Worker("/scripts/workers/brightness.js");
   worker.onmessage = function({ data }) {
     ctx.putImageData(data, imgPos.x, imgPos.y);
@@ -38,8 +38,9 @@ uploadButton.addEventListener("change", e => {
 
 ////////////////////////////////////////////
 
-const blurSlider = document.querySelector("input#_blur");
-blurSlider.addEventListener("mouseup", e => {
+controls.basic.blurSlider.addEventListener("mouseup", e => {
+  lastUsedElement && lastUsedElement!=e.target && lastUsedElement.reset();
+  lastUsedElement = e.target;
   let blurVal = e.target.value;
   if(blurVal == 3) {
     ctx.putImageData(imageData, imgPos.x, imgPos.y);
@@ -72,18 +73,61 @@ saveNProceed.addEventListener("click", e => {
 })
 
 
-/////////////////////////////////
+///////////////////////////////////////////////////////
+
+// const edgeSobel = document.querySelector("input#sobel");
+// const sobelFn = (() => {
+//   let active = false;
+//   return () => {
+//     if(active) {
+//       ctx.putImageData(imageData, imgPos.x, imgPos.y); 
+//       active = false;
+//     }
+//     else {
+//       const worker = new Worker("/scripts/workers/edge.js");
+//       worker.onmessage = function({ data }) {
+//         ctx.putImageData(data, imgPos.x, imgPos.y);
+//       }
+//       worker.postMessage({
+//         imgData: imageData,
+//         kernel: [
+//           [1, 0, 1],
+//           [1, 0, 1],
+//           [1, 0, 1]
+//         ]
+//       });
+//       active = true;
+//     }
+//   }
+// })();
+// edgeSobel.addEventListener("click", sobelFn);
 
 
-function reset() {
-  blurSlider.value = blurSlider.min;
-  brightSlider.value = 0;
-}
+////////////////////////////////////////////
+const toGrayFn = (() => {
+  
+  let active = false;
+  return e => {
+    lastUsedElement && lastUsedElement!=e.target && lastUsedElement.reset();
+    lastUsedElement = e.target;
+    console.log(e.target);
+    if(active) {
+      ctx.putImageData(imageData, imgPos.x, imgPos.y);
+      active = false;
+    }
+    else {
+      const worker = new Worker("/scripts/workers/toGray.js");
+      worker.onmessage = function({ data }) {
+        ctx.putImageData(data, imgPos.x, imgPos.y);
+        worker.terminate();
+      }
+      worker.postMessage({
+        imgData: imageData
+      });
+      active = true;
+    }
+  }
+})();
 
-function activate() {
-  blurSlider.disabled = false;
-  blurSlider.classList.remove("disabled");
-  brightSlider.disabled = false;
-  brightSlider.classList.remove("disabled");
-  saveNProceed.disabled = false;
-}
+
+controls.basic.grayCheck.addEventListener("click", toGrayFn);

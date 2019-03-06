@@ -1,0 +1,42 @@
+body, html {
+	margin: 0px;
+	padding: 0px;
+}
+
+#wrapper {
+	width: 500px;
+	margin: auto;
+}
+
+ul.accordion {
+  list-style-type: none;
+  border-radius: 2px;
+  box-shadow: 0px 0px 12px #dedede;
+  padding: 0px;
+}
+
+ul li .head {
+	padding: 20px 25px;
+	font-size: 22px;
+  cursor: pointer;
+}
+
+ul li .body {
+	overflow: hidden;
+	box-sizing: border-box;
+	max-height: 0px;
+	height:auto;
+	transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+	border-bottom: 1px solid #dedede;
+}
+
+ul li .body.active {
+	max-height: 600px;
+  transition: max-height 0.5s cubic-bezier(1, 0.5, 0.5, 0.5);
+}
+
+ul li .body .forMargin {
+  margin: 0px 7px 15px 25px;
+  /* margin: 15px auto; */
+}
+

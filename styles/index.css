@@ -24,10 +24,20 @@ canvas {
 
 div#canvasDiv {
   position: relative;
+  align-self: center;
 }
 
 .feature {
   margin: 18px 0px 0px 0px;
+}
+
+.feature.check_div {
+  display: flex;
+  align-items: center;
+}
+
+.feature.check_div input[type=checkbox] {
+  margin-right: 15px;
 }
 
 .feature .name {
