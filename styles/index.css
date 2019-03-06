@@ -6,6 +6,8 @@ body, html {
   background-color: #fefefe;
   --tc-main: #673AB7;
   --tc-optional: #512DA8;
+  --tc-optional-l1: #5730b5;
+  --tc-optional-l2: #9072d9;
   --tc-accent: #2196F3;
 }
 
@@ -31,15 +33,6 @@ div#canvasDiv {
   margin: 18px 0px 0px 0px;
 }
 
-.feature.check_div {
-  display: flex;
-  align-items: center;
-}
-
-.feature.check_div input[type=checkbox] {
-  margin-right: 15px;
-}
-
 .feature .name {
   margin: 4px 0px 0px 3px;
   color: #666;
@@ -54,6 +47,7 @@ div#canvasDiv {
 
 ._btn {
   padding: 10px 12px;
+  display: inline-block;
   background-color: var(--tc-main) ;
   color: white;
   font-family: sans-serif;

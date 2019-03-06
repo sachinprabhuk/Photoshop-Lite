@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/styles/index.css">
   <link rel="stylesheet" href="/styles/slider.css">
   <link rel="stylesheet" href="/styles/accordion.css">
+  <link rel="stylesheet" href="/styles/checkbox.css">
 
   <title>Photoshop Lite</title>
 </head>
@@ -28,7 +29,21 @@
             Basic
           </div>
           <div class="body">
-            <div class="forMargin">
+            <div class="forMargin" >
+
+              <label class="checkbox-wrap" for="toGray">
+                <input type="checkbox" id="toGray" name="toGray"
+                disabled>
+                <span></span>
+                Grayscale
+              </label>
+              <label class="checkbox-wrap" for="invert">
+                <input type="checkbox" id="invert" name="invert"
+                disabled>
+                <span></span>
+                Invert
+              </label>
+
               <div class="feature">
                 <h3 class="name">brightness</h3>
                 <input type="range" class="slider disabled" id="bright"
@@ -38,10 +53,6 @@
                 <h3 class="name">blur</h3>
                 <input type="range" class="slider disabled" id="_blur"
                 min="3" max="13" value="3" step="2" disabled>
-              </div>
-              <div class="feature check_div">
-                <input type="checkbox" name="toGray" id="toGray" disabled>
-                <label for="toGray">To Gray Scale</label>
               </div>
             </div>
           </div>

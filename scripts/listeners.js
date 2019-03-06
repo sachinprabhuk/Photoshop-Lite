@@ -1,6 +1,10 @@
-controls.basic.brightSlider.addEventListener("mouseup", e => {
+/*
+  Brightness slider listener
+*/
+
+controls.basic.brightSlider.addEventListener("mouseup", function(e) {
   lastUsedElement && lastUsedElement!=e.target && lastUsedElement.reset();
-  lastUsedElement = e.target;
+  lastUsedElement = this;
   const worker = new Worker("/scripts/workers/brightness.js");
   worker.onmessage = function({ data }) {
     ctx.putImageData(data, imgPos.x, imgPos.y);
@@ -12,7 +16,9 @@ controls.basic.brightSlider.addEventListener("mouseup", e => {
   });
 });
 
-///////////////////////////////////////////////////////////
+/*
+  upload pic button listener
+*/
 
 const uploadButton = document.querySelector("input#upload");
 uploadButton.addEventListener("change", e => {
@@ -20,35 +26,39 @@ uploadButton.addEventListener("change", e => {
   reader.readAsDataURL(e.target.files[0]);
   reader.onload = function({ target: { result } }) {
     const img = new Image();
-    img.onload = () => {
+    img.onload = function() {
       activate();
       reset();
       imageUploaded = true;
       imgPos = {
-        x: (canvas.width - img.width) >> 1,
-        y: (canvas.height - img.height) >> 1
+        x: (canvas.width - this.width) >> 1,
+        y: (canvas.height - this.height) >> 1
       };
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, imgPos.x, imgPos.y);
-      imageData = ctx.getImageData(imgPos.x, imgPos.y, img.width, img.height);
+      ctx.drawImage(this, imgPos.x, imgPos.y);
+      imageData = ctx.getImageData(
+        imgPos.x, imgPos.y, 
+        this.width, this.height
+      );
     }
     img.src = result;
   } 
 });
 
-////////////////////////////////////////////
+/*
+  blur slider listener
+*/
 
-controls.basic.blurSlider.addEventListener("mouseup", e => {
-  lastUsedElement && lastUsedElement!=e.target && lastUsedElement.reset();
-  lastUsedElement = e.target;
-  let blurVal = e.target.value;
+controls.basic.blurSlider.addEventListener("mouseup", function(e) {
+  lastUsedElement && lastUsedElement!==this && lastUsedElement.reset();
+  lastUsedElement = this;
+  let blurVal = this.value;
   if(blurVal == 3) {
     ctx.putImageData(imageData, imgPos.x, imgPos.y);
     return;
   }
 
   blurVal -= 2;
-  const kernel = Array(blurVal).fill(Array(blurVal).fill(1));
   const worker = new Worker("/scripts/workers/mask.js");
   worker.onmessage = function({ data }) {
     ctx.putImageData(data, imgPos.x, imgPos.y);
@@ -56,11 +66,13 @@ controls.basic.blurSlider.addEventListener("mouseup", e => {
   }
   worker.postMessage({
     imgData: imageData,
-    kernel
-  })
+    kernel: Array(blurVal).fill(Array(blurVal).fill(1))
+  });
 });
 
-////////////////////////////////////////////////////
+/*
+  save button listener
+*/
 
 const saveNProceed = document.querySelector("button#save");
 saveNProceed.addEventListener("click", e => {
@@ -70,7 +82,26 @@ saveNProceed.addEventListener("click", e => {
   );
   reset();
   new Toast("Image saved!! Continue editing.", 3000);
-})
+});
+
+/*  
+  to gray scale checkbox listener.
+*/
+
+controls.basic.grayCheck.addEventListener("click", function(e) {
+  lastUsedElement && lastUsedElement !== this && lastUsedElement.reset();
+  lastUsedElement = this;
+  if(this.checked) {
+    const worker = new Worker("/scripts/workers/toGray.js");
+    worker.onmessage = function({ data }) {
+      ctx.putImageData(data, imgPos.x, imgPos.y);
+      worker.terminate();
+    }
+    worker.postMessage({ imgData: imageData });
+  }
+  else
+    ctx.putImageData(imageData, imgPos.x, imgPos.y);    
+});
 
 
 ///////////////////////////////////////////////////////
@@ -102,32 +133,3 @@ saveNProceed.addEventListener("click", e => {
 // })();
 // edgeSobel.addEventListener("click", sobelFn);
 
-
-////////////////////////////////////////////
-const toGrayFn = (() => {
-  
-  let active = false;
-  return e => {
-    lastUsedElement && lastUsedElement!=e.target && lastUsedElement.reset();
-    lastUsedElement = e.target;
-    console.log(e.target);
-    if(active) {
-      ctx.putImageData(imageData, imgPos.x, imgPos.y);
-      active = false;
-    }
-    else {
-      const worker = new Worker("/scripts/workers/toGray.js");
-      worker.onmessage = function({ data }) {
-        ctx.putImageData(data, imgPos.x, imgPos.y);
-        worker.terminate();
-      }
-      worker.postMessage({
-        imgData: imageData
-      });
-      active = true;
-    }
-  }
-})();
-
-
-controls.basic.grayCheck.addEventListener("click", toGrayFn);
