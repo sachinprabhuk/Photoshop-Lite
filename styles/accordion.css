@@ -26,17 +26,39 @@ ul li .body {
 	box-sizing: border-box;
 	max-height: 0px;
 	height:auto;
-	transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+	transition: max-height 0.6s cubic-bezier(0, 1, 0, 1);
 	border-bottom: 1px solid #dedede;
 }
 
 ul li .body.active {
 	max-height: 600px;
-  transition: max-height 0.5s cubic-bezier(1, 0.5, 0.5, 0.5);
+  transition: max-height 0.6s cubic-bezier(1, 0.5, 0.5, 0.5);
 }
 
-ul li .body .forMargin {
-  margin: 0px 7px 22px 25px;
-  /* margin: 15px auto; */
+ul li .body .body_inner {
+  margin: 0px 7px 22px 26px;
+	display: grid;
+	grid-row-gap: 22px;
+	align-items: top;
+	/* grid-auto-rows: 1fr; */
 }
 
+.accordion li .body .name {
+  margin: 4px 0px 0px 3px;
+  color: #666;
+  font-size: 14px;
+}
+
+/*******************/
+.accordion .body .pair {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.accordion .body .pairParent {
+	padding: 5px;
+}
+.accordion .body .pairParent p {
+	margin: 0px 0px 10px 0px;
+	font-size: 18px;
+}

@@ -10,9 +10,24 @@ let lastUsedElement = null;
 const controls = {
   basic: {
     brightSlider: document.querySelector("input#bright"),
-    blurSlider: document.querySelector("input#_blur"),
-    grayCheck: document.querySelector("input#toGray")
+    blurSlider: document.querySelector("input#_blur")
+  },
+  edgeDetection: {
+    sobelH: document.querySelector("input#sobelH"),
+    sobelV: document.querySelector("input#sobelV"),
+    prewittH: document.querySelector("input#prewittH"),
+    prewittV: document.querySelector("input#prewittV"),
+  },
+  filters: {
+    grayScale: document.querySelector("input#toGray")
   }
+}
+
+HTMLInputElement.prototype.reset = function() {
+  this.checked = false;
+}
+HTMLInputElement.prototype.activate = function() {
+  this.disabled = false;
 }
 
 controls.basic.brightSlider.reset = function() {this.value = 0;}
@@ -27,18 +42,40 @@ controls.basic.blurSlider.activate = function() {
   this.classList.remove("disabled");
 }
 
-controls.basic.grayCheck.reset = function() {this.checked = false;}
-controls.basic.grayCheck.activate = function() {this.disabled = false;}
+// default reset and acivate for all edge detection elements
+
+// default reset and acivate for grayscale
+
+
 
 /////////////////////////////////
 
 function reset() {
-  for(let keys in controls.basic)
-    controls.basic[keys].reset();
+  for(let IPtype in controls)
+    for(let operation in controls[IPtype])
+      controls[IPtype][operation].reset();
 }
 
 function activate() {
   saveNProceed.disabled = false;
-  for(let keys in controls.basic)
-    controls.basic[keys].activate();
+  for(let IPtype in controls)
+    for(let operation in controls[IPtype])
+      controls[IPtype][operation].activate();
 }
+
+const sobelHkernel = [
+  [1, 1, 2, 1, 1], [1, 2, 2, 2, 1], [0, 0, 0, 0, 0],
+  [-1, -2, -2, -2, -1], [-1, -1, -2, -1, -1]
+];
+const sobelVkernel = [
+  [1, 1, 0, -1, -1], [1, 2, 0, -2, -1], [2, 2, 0, -2, -2],
+  [1, 2, 0, -2, -1], [1, 1, 0, -1, -1]
+];
+const prewittHkernel = [
+  [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [0, 0, 0, 0, 0],
+  [-1, -1, -1, -1, -1], [-1, -1, -1, -1, -1]
+];
+const prewittVkernel = [
+  [1, 1, 0, -1, -1], [1, 1, 0, -1, -1], [1, 1, 0, -1, -1],
+  [1, 1, 0, -1, -1], [1, 1, 0, -1, -1]
+];

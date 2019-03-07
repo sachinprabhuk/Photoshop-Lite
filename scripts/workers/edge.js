@@ -23,7 +23,6 @@ this.onmessage = function({ data: { imgData, kernel } }) {
       for(let r=row-s, m = 0;r<=(row+s);++r, ++m)
         for(let c=col-s, n = 0;c<=(col+s);++c, ++n) {
           temp = getPixelPos(c, r, width);
-          // console.log(r, c, m , n);
           avg = (
             originalPixels[temp] + originalPixels[temp+1]
              + originalPixels[temp+2]
@@ -31,9 +30,9 @@ this.onmessage = function({ data: { imgData, kernel } }) {
           sum += (avg*kernel[m][n]);
         }
       
-      pixels[i] = sum/9;
-      pixels[i+1] = sum/9;
-      pixels[i+2] = sum/9;
+      pixels[i] = sum/klen*klen;
+      pixels[i+1] = sum/klen*klen;
+      pixels[i+2] = sum/klen*klen;
     }
   }
 

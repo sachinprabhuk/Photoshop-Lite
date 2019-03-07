@@ -29,15 +29,9 @@
             Basic
           </div>
           <div class="body">
-            <div class="forMargin" >
+            <div class="body_inner">
 
-              <label class="checkbox-wrap" for="toGray">
-                <input type="checkbox" id="toGray" name="toGray"
-                disabled>
-                <span></span>
-                Grayscale
-              </label>
-              <label class="checkbox-wrap" for="invert">
+              <label class="checkbox-wrap name" for="invert">
                 <input type="checkbox" id="invert" name="invert"
                 disabled>
                 <span></span>
@@ -49,11 +43,13 @@
                 <input type="range" class="slider disabled" id="bright"
                 min="-50" max="50" value="0" disabled>
               </div>
+
               <div class="feature">
                 <h3 class="name">blur</h3>
                 <input type="range" class="slider disabled" id="_blur"
                 min="3" max="13" value="3" step="2" disabled>
               </div>
+
             </div>
           </div>
         </li>
@@ -62,13 +58,43 @@
             Edge detection
           </div>
           <div class="body">
-            <div class="forMargin">
+            <div class="body_inner">
+              <div class="pairParent">
+                <p>Sobel operator</p>
+                <div class="pair">
+                  <label class="checkbox-wrap name" for="sobelH">
+                    <input type="checkbox" id="sobelH" name="sobelH"
+                    disabled>
+                    <span></span>
+                    Horizontal
+                  </label> 
+                  <label class="checkbox-wrap name" for="sobelV">
+                    <input type="checkbox" id="sobelV" name="sobelV"
+                    disabled>
+                    <span></span>
+                    Vertical
+                  </label>        
+                </div>
+              </div>
               
-              <ul>
-                <li>item 1</li>
-              <li>item 2</li>
-              <li>item 3</li>
-              </ul>
+              <div class="pairParent">
+                <p>Prewit operator</p>
+                <div class="pair">
+                  <label class="checkbox-wrap name" for="prewittH">
+                    <input type="checkbox" id="prewittH" name="prewittH"
+                    disabled>
+                    <span></span>
+                    Horizontal
+                  </label> 
+                  <label class="checkbox-wrap name" for="prewittV">
+                    <input type="checkbox" id="prewittV" name="prewittV"
+                    disabled>
+                    <span></span>
+                    Vertical
+                  </label>        
+                </div>
+              </div>
+                    
             </div>
           </div>
           </li>
@@ -77,13 +103,13 @@
             Filters
           </div>
           <div class="body">
-            <div class="forMargin">
-              <ul>
-                <li>item 1</li>
-                <li>item 2</li>
-                <li>item 3</li>
-                <li>item 4</li>
-              </ul>
+            <div class="body_inner">
+              <label class="checkbox-wrap name" for="toGray">
+                <input type="checkbox" id="toGray" name="toGray"
+                disabled>
+                <span></span>
+                Grayscale
+              </label>
             </div>
           </div>
         </li>

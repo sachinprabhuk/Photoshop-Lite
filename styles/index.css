@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
   
+
+* {
+  font-family: roboto;
+}
+
 body, html {
   padding: 0px;
   margin: 0px;
@@ -27,16 +32,6 @@ canvas {
 div#canvasDiv {
   position: relative;
   align-self: center;
-}
-
-.feature {
-  margin: 18px 0px 0px 0px;
-}
-
-.feature .name {
-  margin: 4px 0px 0px 3px;
-  color: #666;
-  font-size: 17px;
 }
 
 #editDiv > #main {

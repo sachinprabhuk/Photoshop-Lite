@@ -88,7 +88,7 @@ saveNProceed.addEventListener("click", e => {
   to gray scale checkbox listener.
 */
 
-controls.basic.grayCheck.addEventListener("click", function(e) {
+controls.filters.grayScale.addEventListener("click", function(e) {
   lastUsedElement && lastUsedElement !== this && lastUsedElement.reset();
   lastUsedElement = this;
   if(this.checked) {
@@ -103,33 +103,46 @@ controls.basic.grayCheck.addEventListener("click", function(e) {
     ctx.putImageData(imageData, imgPos.x, imgPos.y);    
 });
 
+/*
+  edge detection prewitt
+*/
 
-///////////////////////////////////////////////////////
+const edgeDetection = (node, kernel) => {
+  lastUsedElement && lastUsedElement !== node && lastUsedElement.reset();
+  lastUsedElement = node;
+  if(node.checked) {
+    const worker = new Worker("/scripts/workers/edge.js");
+    worker.onmessage = function({ data }) {
+      ctx.putImageData(data, imgPos.x, imgPos.y);
+      worker.terminate();
+    }
+    worker.postMessage({
+      imgData: imageData,
+      kernel
+    });    
+  }
+  else
+    ctx.putImageData(imageData, imgPos.x, imgPos.y); 
+}
 
-// const edgeSobel = document.querySelector("input#sobel");
-// const sobelFn = (() => {
-//   let active = false;
-//   return () => {
-//     if(active) {
-//       ctx.putImageData(imageData, imgPos.x, imgPos.y); 
-//       active = false;
-//     }
-//     else {
-//       const worker = new Worker("/scripts/workers/edge.js");
-//       worker.onmessage = function({ data }) {
-//         ctx.putImageData(data, imgPos.x, imgPos.y);
-//       }
-//       worker.postMessage({
-//         imgData: imageData,
-//         kernel: [
-//           [1, 0, 1],
-//           [1, 0, 1],
-//           [1, 0, 1]
-//         ]
-//       });
-//       active = true;
-//     }
-//   }
-// })();
-// edgeSobel.addEventListener("click", sobelFn);
+controls.edgeDetection.sobelH.addEventListener("click", function() {
+  edgeDetection(this, [
+    [1, 2, 1], [0, 0, 0], [-1, -2, -1]
+  ]);
+});
+controls.edgeDetection.sobelV.addEventListener("click", function() {
+  edgeDetection(this, [
+    [1, 0, -1], [2, 0, -2], [1, 0, -1]
+  ]);
+});
+controls.edgeDetection.prewittH.addEventListener("click", function() {
+  edgeDetection(this, [
+    [1, 1, 1], [0, 0, 0], [-1, -1, -1]
+  ]);
+});
+controls.edgeDetection.prewittV.addEventListener("click", function() {
+  edgeDetection(this, [
+    [1, 0, -1], [1, 0, -1], [1, 0, -1]
+  ]);
+});
 
