@@ -10,7 +10,8 @@ let lastUsedElement = null;
 const controls = {
   basic: {
     brightSlider: document.querySelector("input#bright"),
-    blurSlider: document.querySelector("input#_blur")
+    blurSlider: document.querySelector("input#_blur"),
+    invert: document.querySelector("input#invert")
   },
   edgeDetection: {
     sobelH: document.querySelector("input#sobelH"),
@@ -23,12 +24,8 @@ const controls = {
   }
 }
 
-HTMLInputElement.prototype.reset = function() {
-  this.checked = false;
-}
-HTMLInputElement.prototype.activate = function() {
-  this.disabled = false;
-}
+HTMLInputElement.prototype.reset = function(){this.checked = false;}
+HTMLInputElement.prototype.activate = function(){this.disabled = false;}
 
 controls.basic.brightSlider.reset = function() {this.value = 0;}
 controls.basic.brightSlider.activate = function() {
@@ -63,6 +60,8 @@ function activate() {
       controls[IPtype][operation].activate();
 }
 
+
+/*
 const sobelHkernel = [
   [1, 1, 2, 1, 1], [1, 2, 2, 2, 1], [0, 0, 0, 0, 0],
   [-1, -2, -2, -2, -1], [-1, -1, -2, -1, -1]
@@ -79,3 +78,4 @@ const prewittVkernel = [
   [1, 1, 0, -1, -1], [1, 1, 0, -1, -1], [1, 1, 0, -1, -1],
   [1, 1, 0, -1, -1], [1, 1, 0, -1, -1]
 ];
+*/

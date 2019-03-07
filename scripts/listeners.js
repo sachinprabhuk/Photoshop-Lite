@@ -46,6 +46,25 @@ uploadButton.addEventListener("change", e => {
 });
 
 /*
+  Invert color listener
+*/
+
+controls.basic.invert.addEventListener("click", function(e) {
+  lastUsedElement && lastUsedElement!==this && lastUsedElement.reset();
+  lastUsedElement = this;
+  if(this.checked) {
+    const worker = new Worker("/scripts/workers/invert.js");
+    worker.onmessage = function({ data }) {
+      ctx.putImageData(data, imgPos.x, imgPos.y);
+      worker.terminate();
+    }
+    worker.postMessage({ imgData: imageData });
+  }
+  else
+    ctx.putImageData(imageData, imgPos.x, imgPos.y);
+})
+
+/*
   blur slider listener
 */
 
