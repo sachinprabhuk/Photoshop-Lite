@@ -24,19 +24,13 @@
       </div>
       <!------------------------------------------------------>
       <ul class="accordion">
+        <!-- basic -->
         <li>
           <div class="head">
             Basic
           </div>
           <div class="body">
             <div class="body_inner">
-
-              <label class="checkbox-wrap name" for="invert">
-                <input type="checkbox" id="invert" name="invert"
-                disabled>
-                <span></span>
-                Invert
-              </label>
 
               <div class="feature">
                 <h3 class="name">brightness</h3>
@@ -53,6 +47,7 @@
             </div>
           </div>
         </li>
+        <!-- edge detection -->
         <li>
           <div class="head">
             Edge detection
@@ -97,13 +92,20 @@
                     
             </div>
           </div>
-          </li>
+        </li>
+        <!-- filters -->
         <li>
           <div class="head">
             Filters
           </div>
           <div class="body">
             <div class="body_inner">
+              <label class="checkbox-wrap name" for="invert">
+                <input type="checkbox" id="invert" name="invert"
+                disabled>
+                <span></span>
+                Invert
+              </label>
               <label class="checkbox-wrap name" for="toGray">
                 <input type="checkbox" id="toGray" name="toGray"
                 disabled>
@@ -113,12 +115,13 @@
             </div>
           </div>
         </li>
+        <!-- segmentation -->
         <li>
           <div class="head">
             Segmentation
           </div>
           <div class="body">
-            <div class="forMargin">
+            <div class="body_inner">
               <ul>
                 <li>dafa</li>
                 <li>sadfa</li>

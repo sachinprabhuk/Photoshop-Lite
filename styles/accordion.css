@@ -36,11 +36,10 @@ ul li .body.active {
 }
 
 ul li .body .body_inner {
-  margin: 0px 7px 22px 26px;
+  margin: 0px 7px 25px 26px;
 	display: grid;
 	grid-row-gap: 22px;
 	align-items: top;
-	/* grid-auto-rows: 1fr; */
 }
 
 .accordion li .body .name {
