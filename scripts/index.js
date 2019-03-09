@@ -1,15 +1,3 @@
-if(navigator.serviceWorker) {
-  navigator
-    .serviceWorker
-    .register("/serviceWorker.js")
-    .then(reg =>{
-      console.log("This app is powered by service workers!");
-    })
-    .catch(err => {
-      console.warn("Something went wrong with service workers!");
-    });
-}
-
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 

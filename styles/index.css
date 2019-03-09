@@ -98,3 +98,155 @@ div#canvasDiv {
   text-align: center;
   cursor: pointer;
 }
+
+/* 
+  accordion.css
+*/
+ul.accordion {
+  list-style-type: none;
+  border-radius: 2px;
+  box-shadow: 0px 0px 12px #dedede;
+  padding: 0px;
+}
+
+ul li .head {
+	padding: 20px 25px;
+	font-size: 22px;
+  cursor: pointer;
+}
+
+ul li .body {
+	overflow: hidden;
+	box-sizing: border-box;
+	max-height: 0px;
+	height:auto;
+	transition: max-height 0.6s cubic-bezier(0, 1, 0, 1);
+	border-bottom: 1px solid #dedede;
+}
+
+ul li .body.active {
+	max-height: 600px;
+  transition: max-height 0.6s cubic-bezier(1, 0.5, 0.5, 0.5);
+}
+
+ul li .body .body_inner {
+  margin: 0px 7px 25px 26px;
+	display: grid;
+	grid-row-gap: 22px;
+	align-items: top;
+}
+
+.accordion li .body .name {
+  margin: 4px 0px 0px 3px;
+  color: #666;
+  font-size: 14px;
+}
+
+/*******************/
+.accordion .body .pair {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.accordion .body .pairParent {
+	padding: 5px;
+}
+.accordion .body .pairParent p {
+	margin: 0px 0px 10px 0px;
+	font-size: 18px;
+}
+
+/*
+  checkbox.css
+*/
+input[type=checkbox] {
+	display: none;
+}
+
+label.checkbox-wrap {
+	display: flex;
+	align-items: center;
+	font-family: roboto;
+}
+
+label.checkbox-wrap span {
+	display: inline-block;
+	box-sizing: border-box;
+	width: 20px;
+	height: 20px;
+	padding: 2px;
+	border: 2px solid var(--tc-optional-l2);  
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+label.checkbox-wrap span::before {
+	content: '';
+	display: block;
+	width: 100%;
+	height: 100%;
+	transform: scale(0, 0);
+	background-color: var(--tc-optional-l2);  
+	transition: transform 0.1s linear;
+}
+
+input[type=checkbox]:checked + span::before {
+	transform: scale(1, 1);
+}
+
+input[type=checkbox]:disabled + span {
+	cursor: not-allowed;
+  border-color: #ddd;
+}
+
+
+/*
+  slider.css
+*/
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  max-width: 250px;
+  height: 5px;
+  border-radius: 2px;   
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.6;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%; 
+  background: var(--tc-optional);
+  cursor: pointer;
+}
+
+.slider.disabled::-webkit-slider-thumb {
+  background: #ddd;
+  cursor: not-allowed;
+}
+
+.slider.disabled {
+  cursor: not-allowed;
+}
+
+.slider::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--tc-optional);
+  cursor: pointer;
+}
+
+
+
+
+
+
+
