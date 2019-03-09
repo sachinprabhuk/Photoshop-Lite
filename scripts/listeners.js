@@ -48,11 +48,11 @@ uploadButton.addEventListener("change", e => {
   Invert color listener
 */
 
-controls.basic.invert.node.addEventListener("click", function(e) {
+controls.filters.invert.node.addEventListener("click", function(e) {
   lastUsedElement && lastUsedElement!==this && lastUsedElement.reset();
   lastUsedElement = this;
   if(this.checked) {
-    const { worker } = controls.basic.invert;
+    const { worker } = controls.filters.invert;
     worker.onmessage = function({ data }) {
       ctx.putImageData(data, imgPos.x, imgPos.y);
     }
