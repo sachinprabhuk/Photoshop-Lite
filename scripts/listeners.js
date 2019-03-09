@@ -2,13 +2,12 @@
   Brightness slider listener
 */
 
-controls.basic.brightSlider.addEventListener("mouseup", function(e) {
+controls.basic.brightSlider.node.addEventListener("mouseup", function(e) {
   lastUsedElement && lastUsedElement!=e.target && lastUsedElement.reset();
   lastUsedElement = this;
-  const worker = new Worker("/scripts/workers/brightness.js");
+  const { worker } = controls.basic.brightSlider;
   worker.onmessage = function({ data }) {
     ctx.putImageData(data, imgPos.x, imgPos.y);
-    worker.terminate();
   }
   worker.postMessage({
     imgData: imageData,
@@ -49,14 +48,13 @@ uploadButton.addEventListener("change", e => {
   Invert color listener
 */
 
-controls.basic.invert.addEventListener("click", function(e) {
+controls.basic.invert.node.addEventListener("click", function(e) {
   lastUsedElement && lastUsedElement!==this && lastUsedElement.reset();
   lastUsedElement = this;
   if(this.checked) {
-    const worker = new Worker("/scripts/workers/invert.js");
+    const { worker } = controls.basic.invert;
     worker.onmessage = function({ data }) {
       ctx.putImageData(data, imgPos.x, imgPos.y);
-      worker.terminate();
     }
     worker.postMessage({ imgData: imageData });
   }
@@ -68,7 +66,7 @@ controls.basic.invert.addEventListener("click", function(e) {
   blur slider listener
 */
 
-controls.basic.blurSlider.addEventListener("mouseup", function(e) {
+controls.basic.blurSlider.node.addEventListener("mouseup", function(e) {
   lastUsedElement && lastUsedElement!==this && lastUsedElement.reset();
   lastUsedElement = this;
   let blurVal = this.value;
@@ -78,10 +76,9 @@ controls.basic.blurSlider.addEventListener("mouseup", function(e) {
   }
 
   blurVal -= 2;
-  const worker = new Worker("/scripts/workers/mask.js");
+  const { worker } = controls.basic. blurSlider;
   worker.onmessage = function({ data }) {
     ctx.putImageData(data, imgPos.x, imgPos.y);
-    worker.terminate();
   }
   worker.postMessage({
     imgData: imageData,
@@ -107,14 +104,13 @@ saveNProceed.addEventListener("click", e => {
   to gray scale checkbox listener.
 */
 
-controls.filters.grayScale.addEventListener("click", function(e) {
+controls.filters.grayScale.node.addEventListener("click", function(e) {
   lastUsedElement && lastUsedElement !== this && lastUsedElement.reset();
   lastUsedElement = this;
   if(this.checked) {
-    const worker = new Worker("/scripts/workers/toGray.js");
+    const { worker } = controls.filters.grayScale;
     worker.onmessage = function({ data }) {
       ctx.putImageData(data, imgPos.x, imgPos.y);
-      worker.terminate();
     }
     worker.postMessage({ imgData: imageData });
   }
@@ -130,10 +126,9 @@ const edgeDetection = (node, kernel) => {
   lastUsedElement && lastUsedElement !== node && lastUsedElement.reset();
   lastUsedElement = node;
   if(node.checked) {
-    const worker = new Worker("/scripts/workers/edge.js");
+    const worker = edgeWorker;
     worker.onmessage = function({ data }) {
       ctx.putImageData(data, imgPos.x, imgPos.y);
-      worker.terminate();
     }
     worker.postMessage({
       imgData: imageData,
@@ -144,22 +139,22 @@ const edgeDetection = (node, kernel) => {
     ctx.putImageData(imageData, imgPos.x, imgPos.y); 
 }
 
-controls.edgeDetection.sobelH.addEventListener("click", function() {
+controls.edgeDetection.sobelH.node.addEventListener("click", function() {
   edgeDetection(this, [
     [1, 2, 1], [0, 0, 0], [-1, -2, -1]
   ]);
 });
-controls.edgeDetection.sobelV.addEventListener("click", function() {
+controls.edgeDetection.sobelV.node.addEventListener("click", function() {
   edgeDetection(this, [
     [1, 0, -1], [2, 0, -2], [1, 0, -1]
   ]);
 });
-controls.edgeDetection.prewittH.addEventListener("click", function() {
+controls.edgeDetection.prewittH.node.addEventListener("click", function() {
   edgeDetection(this, [
     [1, 1, 1], [0, 0, 0], [-1, -1, -1]
   ]);
 });
-controls.edgeDetection.prewittV.addEventListener("click", function() {
+controls.edgeDetection.prewittV.node.addEventListener("click", function() {
   edgeDetection(this, [
     [1, 0, -1], [1, 0, -1], [1, 0, -1]
   ]);

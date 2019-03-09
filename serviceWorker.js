@@ -8,7 +8,7 @@ self.addEventListener("install", e => {
           "/editor.html",
           "/scripts/workers/brightness.js",
           "/scripts/workers/edge.js",
-          "/scripts/workers/mask.js",
+          "/scripts/workers/blur.js",
           "/scripts/workers/toGray.js",
           "/scripts/workers/invert.js",
           "/scripts/index.js",
@@ -25,8 +25,7 @@ self.addEventListener("install", e => {
 });
 
 self.addEventListener("activate", e => {
-  console.log("activated!!...");
-  console.log(e);
+  console.log("activated service worker!!...");
 })
 
 self.addEventListener("fetch", e => {

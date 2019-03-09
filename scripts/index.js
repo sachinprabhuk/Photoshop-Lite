@@ -7,34 +7,55 @@ let imageData = null;
 let lastUsedElement = null;
 ////////////////////////////////
 
+const edgeWorker = new Worker("/scripts/workers/edge.js");
 const controls = {
   basic: {
-    brightSlider: document.querySelector("input#bright"),
-    blurSlider: document.querySelector("input#_blur"),
-    invert: document.querySelector("input#invert")
+    brightSlider: {
+      node: document.querySelector("input#bright"), 
+      worker: new Worker("/scripts/workers/brightness.js")
+    },
+    blurSlider: { 
+      node: document.querySelector("input#_blur"), 
+      worker: new Worker("/scripts/workers/blur.js")
+    }
   },
   edgeDetection: {
-    sobelH: document.querySelector("input#sobelH"),
-    sobelV: document.querySelector("input#sobelV"),
-    prewittH: document.querySelector("input#prewittH"),
-    prewittV: document.querySelector("input#prewittV"),
+    sobelH: {
+      node: document.querySelector("input#sobelH")
+    },
+    sobelV: {
+      node: document.querySelector("input#sobelV")
+    },
+    prewittH: {
+      node: document.querySelector("input#prewittH")
+    },
+    prewittV: {
+      node: document.querySelector("input#prewittV")
+    }
   },
   filters: {
-    grayScale: document.querySelector("input#toGray")
+    grayScale: {
+      node: document.querySelector("input#toGray"), 
+      worker: new Worker("/scripts/workers/toGray.js")
+    },
+    invert: {
+      node: document.querySelector("input#invert"), 
+      worker: new Worker("/scripts/workers/invert.js")
+    }
   }
 }
 
 HTMLInputElement.prototype.reset = function(){this.checked = false;}
 HTMLInputElement.prototype.activate = function(){this.disabled = false;}
 
-controls.basic.brightSlider.reset = function() {this.value = 0;}
-controls.basic.brightSlider.activate = function() {
+controls.basic.brightSlider.node.reset = function() {this.value = 0;}
+controls.basic.brightSlider.node.activate = function() {
   this.disabled = false;
   this.classList.remove("disabled");
 }
 
-controls.basic.blurSlider.reset = function() {this.value = this.min;}
-controls.basic.blurSlider.activate = function() {
+controls.basic.blurSlider.node.reset = function() {this.value = this.min;}
+controls.basic.blurSlider.node.activate = function() {
   this.disabled = false;
   this.classList.remove("disabled");
 }
@@ -50,14 +71,14 @@ controls.basic.blurSlider.activate = function() {
 function reset() {
   for(let IPtype in controls)
     for(let operation in controls[IPtype])
-      controls[IPtype][operation].reset();
+      controls[IPtype][operation].node.reset();
 }
 
 function activate() {
   saveNProceed.disabled = false;
   for(let IPtype in controls)
     for(let operation in controls[IPtype])
-      controls[IPtype][operation].activate();
+      controls[IPtype][operation].node.activate();
 }
 
 
