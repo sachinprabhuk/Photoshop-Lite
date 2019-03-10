@@ -12,11 +12,11 @@ const allowPlaneWorker = new Worker("/assets/scripts/workers/allowOnly.js");
 const controls = {
   basic: {
     brightSlider: {
-      node: document.querySelector("input#bright"), 
+      node: document.querySelector("input#bright"),
       worker: new Worker("/assets/scripts/workers/brightness.js")
     },
-    blurSlider: { 
-      node: document.querySelector("input#_blur"), 
+    blurSlider: {
+      node: document.querySelector("input#_blur"),
       worker: new Worker("/assets/scripts/workers/blur.js")
     }
   },
@@ -36,11 +36,11 @@ const controls = {
   },
   filters: {
     grayScale: {
-      node: document.querySelector("input#toGray"), 
+      node: document.querySelector("input#toGray"),
       worker: new Worker("/assets/scripts/workers/toGray.js")
     },
     invert: {
-      node: document.querySelector("input#invert"), 
+      node: document.querySelector("input#invert"),
       worker: new Worker("/assets/scripts/workers/invert.js")
     },
     allowR: {
@@ -52,45 +52,70 @@ const controls = {
     allowB: {
       node: document.querySelector("input#allowB")
     }
+  },
+  segmentation: {
+    thresholding: {
+      node: document.querySelector("input[type=checkbox]#thresh"),
+      worker: new Worker("/assets/scripts/workers/toBinaryImage.js")
+    }
   }
-}
+};
 
-HTMLInputElement.prototype.reset = function(){this.checked = false;}
-HTMLInputElement.prototype.activate = function(){this.disabled = false;}
+HTMLInputElement.prototype.reset = function() {
+  this.checked = false;
+};
+HTMLInputElement.prototype.activate = function() {
+  this.disabled = false;
+};
 
-controls.basic.brightSlider.node.reset = function() {this.value = 0;}
+const threshInput = document.querySelector("form#thresholding input");
+const threshBtn = document.querySelector("form#thresholding button");
+const threshForm = document.querySelector("form#thresholding");
+
+controls.segmentation.thresholding.node.reset = function() {
+  threshInput.value = 127;
+  this.checked = false;
+  threshBtn.disabled = true;
+  threshInput.disabled = true;
+};
+controls.segmentation.thresholding.node.activate = function() {
+  this.disabled = false;
+};
+
+controls.basic.brightSlider.node.reset = function() {
+  this.value = 0;
+};
 controls.basic.brightSlider.node.activate = function() {
   this.disabled = false;
   this.classList.remove("disabled");
-}
+};
 
-controls.basic.blurSlider.node.reset = function() {this.value = this.min;}
+controls.basic.blurSlider.node.reset = function() {
+  this.value = this.min;
+};
 controls.basic.blurSlider.node.activate = function() {
   this.disabled = false;
   this.classList.remove("disabled");
-}
+};
 
 // default reset and acivate for all edge detection elements
 
 // default reset and acivate for grayscale
 
-
-
 /////////////////////////////////
 
 function reset() {
-  for(let IPtype in controls)
-    for(let operation in controls[IPtype])
+  for (let IPtype in controls)
+    for (let operation in controls[IPtype])
       controls[IPtype][operation].node.reset();
 }
 
 function activate() {
   saveNProceed.disabled = false;
-  for(let IPtype in controls)
-    for(let operation in controls[IPtype])
+  for (let IPtype in controls)
+    for (let operation in controls[IPtype])
       controls[IPtype][operation].node.activate();
 }
-
 
 /*
 const sobelHkernel = [

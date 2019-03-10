@@ -175,3 +175,32 @@ controls.filters.allowB.node.addEventListener("click", function(e) {
   if (this.checked) allowPlane(this, 2);
   else ctx.putImageData(imageData, imgPos.x, imgPos.y);
 });
+
+/*
+  segmentation
+*/
+
+controls.segmentation.thresholding.node.addEventListener("click", function(e) {
+  lastUsedElement && lastUsedElement !== this && lastUsedElement.reset();
+  lastUsedElement = this;
+  ctx.putImageData(imageData, imgPos.x, imgPos.y);
+  if (this.checked) {
+    threshBtn.disabled = false;
+    threshInput.disabled = false;
+  } else {
+    threshBtn.disabled = true;
+    threshInput.disabled = true;
+  }
+});
+
+threshForm.addEventListener("submit", function(e) {
+  e.preventDefault();
+  const { worker } = controls.segmentation.thresholding;
+  worker.onmessage = function({ data }) {
+    ctx.putImageData(data, imgPos.x, imgPos.y);
+  };
+  worker.postMessage({
+    imgData: imageData,
+    threshold: Number.parseInt(threshInput.value)
+  });
+});
