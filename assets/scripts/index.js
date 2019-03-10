@@ -110,11 +110,34 @@ function reset() {
       controls[IPtype][operation].node.reset();
 }
 
+const saveNProceed = document.querySelector("button#save");
+const downloadBtn = document.querySelector("button#download");
+
 function activate() {
   saveNProceed.disabled = false;
+  downloadBtn.disabled = false;  
   for (let IPtype in controls)
     for (let operation in controls[IPtype])
       controls[IPtype][operation].node.activate();
+}
+
+
+function download() {
+  const link = document.createElement("a");
+  const newCanvas = document.createElement("canvas");
+  newCanvas.width = imageData.width;
+  newCanvas.height = imageData.height;
+  newCanvas
+    .getContext("2d")
+    .putImageData(
+      ctx.getImageData(
+        imgPos.x, imgPos.y, 
+        imageData.width, imageData.height
+      ), 0, 0
+    );
+  link.download = "Photo-lite.png";
+  link.href = newCanvas.toDataURL();
+  link.click();
 }
 
 /*

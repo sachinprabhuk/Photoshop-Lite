@@ -37,6 +37,7 @@ uploadButton.addEventListener("change", e => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(this, imgPos.x, imgPos.y);
       imageData = ctx.getImageData(imgPos.x, imgPos.y, this.width, this.height);
+      downloadBtn.querySelector("img").src = "/assets/photos/d1.png";
     };
     img.src = result;
   };
@@ -86,7 +87,6 @@ controls.basic.blurSlider.node.addEventListener("mouseup", function(e) {
   save button listener
 */
 
-const saveNProceed = document.querySelector("button#save");
 saveNProceed.addEventListener("click", e => {
   imageData = ctx.getImageData(
     imgPos.x,
@@ -95,7 +95,7 @@ saveNProceed.addEventListener("click", e => {
     imageData.height
   );
   reset();
-  new Toast("Image saved!! Continue editing.", 3000);
+  new Toast("Effect saved!! Continue editing.", 3000);
 });
 
 /*  

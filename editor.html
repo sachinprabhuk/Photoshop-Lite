@@ -15,8 +15,13 @@
     <div id="editDiv">
       <input type="file" id="upload" accept="image/*">
       <div id="main">
-        <label class="_btn" for="upload">Upload image</label>
-        <button disabled id="save" class="_btn" disabled>Save n continue</button>
+        <label class="_btn" for="upload">New image</label>
+        <button disabled id="save" class="_btn" disabled>Save effect</button>
+        <button disabled onclick="download()" id="download" 
+        class="_btn" disabled>
+          <img src="/assets/photos/d2.png" alt="download"
+          style="margin: 0px auto;padding: 0px;">
+        </button>        
       </div>
       <!------------------------------------------------------>
       <ul class="accordion">

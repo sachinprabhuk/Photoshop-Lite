@@ -7,6 +7,8 @@ self.addEventListener("install", e => {
         cache.addAll([
           "/editor.html",
           "/index.html",
+          "/assets/photos/d1.png",
+          "/assets/photos/d2.png",
           "/favicon.ico",
           "/assets/styles/index.css",
           "/assets/scripts/workers/brightness.js",
