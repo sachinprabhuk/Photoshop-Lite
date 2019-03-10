@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <style>
-      body, html {
+      body,
+      html {
         padding: 0px;
         margin: 0px;
         font-size: 100%;
@@ -16,7 +17,7 @@
         height: 100vh;
         display: grid;
         place-items: center;
-        
+
         background-position: center top;
         background-repeat: no-repeat;
         background-size: cover;
@@ -28,7 +29,7 @@
         display: inline-block;
         text-decoration: none;
         padding: 16px 22px;
-        background-color: #2196F3;
+        background-color: #2196f3;
         color: white;
         font-size: 22px;
         font-weight: 600;
@@ -38,8 +39,8 @@
       h3 {
         margin: 0px;
         font-size: 3rem;
-        font-family: "open sans",arial,sans-serif;
-      } 
+        font-family: "open sans", arial, sans-serif;
+      }
       p {
         font-size: 1.4rem;
       }
@@ -48,7 +49,7 @@
   </head>
   <body>
     <div id="home">
-      <div> 
+      <div>
         <h3>Photoshop Lite</h3>
         <p>Editor for all your photo editing needs</p>
         <a href="/editor.html" id="">Get started</a>
@@ -57,25 +58,22 @@
   </body>
   <script>
     window.onload = function() {
-      document
-        .querySelector("div#home")
-        .style
-        .backgroundImage =
-        `url(/assets/photos/n${Math.floor(Math.random()*10)+1}.png)`;
-      
-      // if (navigator.serviceWorker) {
-      //   navigator
-      //     .serviceWorker
-      //     .register("/serviceWorker.js")
-      //     .then(reg => {
-      //       console.log("This app is powered by service workers!");
-      //     })
-      //     .catch(err => {
-      //       console.warn("Something went wrong with service workers!");
-      //     });
-      // }
+      document.querySelector(
+        "div#home"
+      ).style.backgroundImage = `url(/assets/photos/n${Math.floor(
+        Math.random() * 10
+      ) + 1}.png)`;
 
-    }
-    
+      if (navigator.serviceWorker) {
+        navigator.serviceWorker
+          .register("/serviceWorker.js")
+          .then(reg => {
+            console.log("This app is powered by service workers!");
+          })
+          .catch(err => {
+            console.warn("Something went wrong with service workers!");
+          });
+      }
+    };
   </script>
 </html>
