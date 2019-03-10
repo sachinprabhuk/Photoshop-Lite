@@ -6,16 +6,17 @@ self.addEventListener("install", e => {
       .then(cache => {
         cache.addAll([
           "/editor.html",
-          "/scripts/workers/brightness.js",
-          "/scripts/workers/edge.js",
-          "/scripts/workers/blur.js",
-          "/scripts/workers/toGray.js",
-          "/scripts/workers/invert.js",
-          "/scripts/index.js",
-          "/scripts/accordion.js",
-          "/scripts/listeners.js",
-          "/scripts/toast.js",
-          "/styles/index.css",
+          "/assets/scripts/workers/brightness.js",
+          "/assets/scripts/workers/edge.js",
+          "/assets/scripts/workers/blur.js",
+          "/assets/scripts/workers/toGray.js",
+          "/assets/scripts/workers/invert.js",
+          "/assets/scripts/index.js",
+          "/assets/scripts/accordion.js",
+          "/assets/scripts/listeners.js",
+          "/assets/scripts/toast.js",
+          "/assets/styles/index.css",
+          "/favicon.ico"
         ]);
       })
       .catch(err => {

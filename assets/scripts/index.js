@@ -7,16 +7,16 @@ let imageData = null;
 let lastUsedElement = null;
 ////////////////////////////////
 
-const edgeWorker = new Worker("/scripts/workers/edge.js");
+const edgeWorker = new Worker("/assets/scripts/workers/edge.js");
 const controls = {
   basic: {
     brightSlider: {
       node: document.querySelector("input#bright"), 
-      worker: new Worker("/scripts/workers/brightness.js")
+      worker: new Worker("/assets/scripts/workers/brightness.js")
     },
     blurSlider: { 
       node: document.querySelector("input#_blur"), 
-      worker: new Worker("/scripts/workers/blur.js")
+      worker: new Worker("/assets/scripts/workers/blur.js")
     }
   },
   edgeDetection: {
@@ -36,11 +36,11 @@ const controls = {
   filters: {
     grayScale: {
       node: document.querySelector("input#toGray"), 
-      worker: new Worker("/scripts/workers/toGray.js")
+      worker: new Worker("/assets/scripts/workers/toGray.js")
     },
     invert: {
       node: document.querySelector("input#invert"), 
-      worker: new Worker("/scripts/workers/invert.js")
+      worker: new Worker("/assets/scripts/workers/invert.js")
     }
   }
 }
