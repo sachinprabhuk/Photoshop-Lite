@@ -8,6 +8,7 @@ let lastUsedElement = null;
 ////////////////////////////////
 
 const edgeWorker = new Worker("/assets/scripts/workers/edge.js");
+const allowPlaneWorker = new Worker("/assets/scripts/workers/allowOnly.js");
 const controls = {
   basic: {
     brightSlider: {
@@ -41,6 +42,15 @@ const controls = {
     invert: {
       node: document.querySelector("input#invert"), 
       worker: new Worker("/assets/scripts/workers/invert.js")
+    },
+    allowR: {
+      node: document.querySelector("input#allowR")
+    },
+    allowG: {
+      node: document.querySelector("input#allowG")
+    },
+    allowB: {
+      node: document.querySelector("input#allowB")
     }
   }
 }

@@ -6,17 +6,19 @@ self.addEventListener("install", e => {
       .then(cache => {
         cache.addAll([
           "/editor.html",
+          "/index.html",
+          "/favicon.ico",
+          "/assets/styles/index.css",
           "/assets/scripts/workers/brightness.js",
           "/assets/scripts/workers/edge.js",
           "/assets/scripts/workers/blur.js",
           "/assets/scripts/workers/toGray.js",
           "/assets/scripts/workers/invert.js",
+          "/assets/scripts/workers/allowOnly.js",
           "/assets/scripts/index.js",
           "/assets/scripts/accordion.js",
           "/assets/scripts/listeners.js",
           "/assets/scripts/toast.js",
-          "/assets/styles/index.css",
-          "/favicon.ico"
         ]);
       })
       .catch(err => {
