@@ -18,6 +18,10 @@ const controls = {
     blurSlider: {
       node: document.querySelector("input#_blur"),
       worker: new Worker("/assets/scripts/workers/blur.js")
+    },
+    contrast: {
+      node: document.querySelector("input#contrast"),
+      worker: new Worker("/assets/scripts/workers/contrast.js")
     }
   },
   edgeDetection: {
@@ -82,21 +86,23 @@ controls.segmentation.thresholding.node.activate = function() {
   this.disabled = false;
 };
 
+function cbActivate() {
+  this.disabled = false;
+  this.classList.remove("disabled");
+}
+
 controls.basic.brightSlider.node.reset = function() {
   this.value = 0;
 };
-controls.basic.brightSlider.node.activate = function() {
-  this.disabled = false;
-  this.classList.remove("disabled");
-};
+controls.basic.brightSlider.node.activate = cbActivate;
+
+controls.basic.contrast.node.reset = function() {this.value = 0;}
+controls.basic.contrast.node.activate = cbActivate
 
 controls.basic.blurSlider.node.reset = function() {
   this.value = this.min;
 };
-controls.basic.blurSlider.node.activate = function() {
-  this.disabled = false;
-  this.classList.remove("disabled");
-};
+controls.basic.blurSlider.node.activate = cbActivate;
 
 // default reset and acivate for all edge detection elements
 

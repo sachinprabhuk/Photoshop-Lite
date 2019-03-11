@@ -16,6 +16,23 @@ controls.basic.brightSlider.node.addEventListener("mouseup", function(e) {
 });
 
 /*
+  contrast slider
+*/
+
+controls.basic.contrast.node.addEventListener("mouseup", function(e) {
+  lastUsedElement && lastUsedElement != e.target && lastUsedElement.reset();
+  lastUsedElement = this;
+  const { worker } = controls.basic.contrast;
+  worker.onmessage = function({ data }) {
+    ctx.putImageData(data, imgPos.x, imgPos.y);
+  };
+  worker.postMessage({
+    imgData: imageData,
+    contrast: this.value
+  });
+});
+
+/*
   upload pic button listener
 */
 
