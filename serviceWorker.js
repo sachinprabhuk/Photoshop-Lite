@@ -1,8 +1,9 @@
-const cache_name = "photoshop-lite-cache";
+const cache_name = "photoshop-lite-cache-v1";
 
 self.addEventListener("install", e => {
   e.waitUntil(
-    caches.open(cache_name)
+    caches
+      .open(cache_name)
       .then(cache => {
         cache.addAll([
           "/editor.html",
@@ -22,27 +23,55 @@ self.addEventListener("install", e => {
           "/assets/scripts/index.js",
           "/assets/scripts/accordion.js",
           "/assets/scripts/listeners.js",
-          "/assets/scripts/toast.js",
+          "/assets/scripts/toast.js"
         ]);
       })
       .catch(err => {
         console.log("Error while adding files to cache!!");
       })
-  )
+  );
 });
 
 self.addEventListener("activate", e => {
-  console.log("activated service worker!!...");
-})
-
-self.addEventListener("fetch", e => {
-  e.respondWith(
+  console.log("activation..");
+  e.waitUntil(
     caches
-    .match(e.request)
-    .then(resp => {
-      if(!resp)
-        return fetch(e.request);
-      return resp;
+      .keys()
+      .then(cacheNames => {
+        return Promise.all(
+          cacheNames.map(cacheName => {
+            if (cacheName !== cache_name)
+              return caches.delete(cacheName);
+          })
+        );
+    })
+  );
+});
+
+self.addEventListener("fetch", event => {
+  event.respondWith(
+    caches.match(event.request).then(function(response) {
+      if (response)
+        return response;
+
+      return fetch(event.request)
+      .then(function(response) {
+
+        if (
+          !response 
+          || response.status !== 200 
+          || response.type !== "basic"
+        )
+          return response;
+
+        const responseToCache = response.clone();
+
+        caches.open(cache_name).then(function(cache) {
+          cache.put(event.request, responseToCache);
+        });
+
+        return response;
+      });
     })
   );
 });
