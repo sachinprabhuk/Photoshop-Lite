@@ -2,7 +2,7 @@
   Brightness slider listener
 */
 
-controls.basic.brightSlider.node.addEventListener("mouseup", function(e) {
+controls.basic.brightSlider.node.addEventListener("change", function(e) {
   lastUsedElement && lastUsedElement != e.target && lastUsedElement.reset();
   lastUsedElement = this;
   const { worker } = controls.basic.brightSlider;
@@ -19,7 +19,7 @@ controls.basic.brightSlider.node.addEventListener("mouseup", function(e) {
   contrast slider
 */
 
-controls.basic.contrast.node.addEventListener("mouseup", function(e) {
+controls.basic.contrast.node.addEventListener("change", function(e) {
   lastUsedElement && lastUsedElement != e.target && lastUsedElement.reset();
   lastUsedElement = this;
   const { worker } = controls.basic.contrast;
@@ -103,7 +103,7 @@ controls.filters.invert.node.addEventListener("click", function(e) {
   blur slider listener
 */
 
-controls.basic.blurSlider.node.addEventListener("mouseup", function(e) {
+controls.basic.blurSlider.node.addEventListener("change", function(e) {
   lastUsedElement && lastUsedElement !== this && lastUsedElement.reset();
   lastUsedElement = this;
   let blurVal = this.value;
