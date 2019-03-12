@@ -36,6 +36,31 @@ controls.basic.contrast.node.addEventListener("mouseup", function(e) {
   upload pic button listener
 */
 
+const getDimensions = image => {
+  const { width, height } = image;
+  const aspectRatio = width/height;
+  let x, y, w, h;
+  if(width > canvas.width || height > canvas.height) {
+    if(width > height) {
+      w = canvas.width;
+      h = w/aspectRatio;
+      x = 0;
+      y = (canvas.height - h) >> 1;
+    }else {
+      h = canvas.height;
+      w = h*aspectRatio;
+      y = 0;
+      x = (canvas.width - w) >> 1;
+    }
+  }else {
+    w = width;
+    h = height;
+    x = (canvas.width-width) >> 1;
+    y = (canvas.height-height) >> 1;	
+  }
+  return {x, y, w, h};
+}
+
 const uploadButton = document.querySelector("input#upload");
 uploadButton.addEventListener("change", e => {
   if (e.target.files.length === 0) return;
@@ -47,13 +72,11 @@ uploadButton.addEventListener("change", e => {
       activate();
       reset();
       imageUploaded = true;
-      imgPos = {
-        x: (canvas.width - this.width) >> 1,
-        y: (canvas.height - this.height) >> 1
-      };
+      const { w, h, x, y } = getDimensions(this);
+      imgPos = { x, y };
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(this, imgPos.x, imgPos.y);
-      imageData = ctx.getImageData(imgPos.x, imgPos.y, this.width, this.height);
+      ctx.drawImage(this, x, y, w, h);
+      imageData = ctx.getImageData(x, y, w, h);
       downloadBtn.querySelector("img").src = "/assets/photos/d1.png";
     };
     img.src = result;

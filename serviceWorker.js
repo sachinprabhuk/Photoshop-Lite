@@ -1,4 +1,4 @@
-const cache_name = "photoshop-lite-cache-v1";
+const cache_name = "photoshop-lite-cache-v3";
 
 self.addEventListener("install", e => {
   e.waitUntil(
@@ -33,7 +33,6 @@ self.addEventListener("install", e => {
 });
 
 self.addEventListener("activate", e => {
-  console.log("activation..");
   e.waitUntil(
     caches
       .keys()
