@@ -1,4 +1,4 @@
-const cache_name = "photoshop-lite-cache-v3";
+const cache_name = "photoshop-lite-cache-v10";
 
 self.addEventListener("install", e => {
   e.waitUntil(
@@ -39,7 +39,7 @@ self.addEventListener("activate", e => {
       .then(cacheNames => {
         return Promise.all(
           cacheNames.map(cacheName => {
-            if (cacheName !== cache_name)
+            if (cacheName.indexOf(cache_name) === -1)
               return caches.delete(cacheName);
           })
         );
