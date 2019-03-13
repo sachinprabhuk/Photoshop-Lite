@@ -38,26 +38,16 @@ controls.basic.contrast.node.addEventListener("change", function(e) {
 
 const getDimensions = image => {
   const { width, height } = image;
-  const aspectRatio = width/height;
-  let x, y, w, h;
-  if(width > canvas.width || height > canvas.height) {
-    if(width > height) {
-      w = canvas.width;
-      h = w/aspectRatio;
-      x = 0;
-      y = (canvas.height - h) >> 1;
-    }else {
-      h = canvas.height;
-      w = h*aspectRatio;
-      y = 0;
-      x = (canvas.width - w) >> 1;
-    }
-  }else {
-    w = width;
-    h = height;
-    x = (canvas.width-width) >> 1;
-    y = (canvas.height-height) >> 1;	
-  }
+  let x = 0, y = 0, w = width, h = height;
+  const aspectRatio = w/h;
+  if(w >= canvas.width)
+    w = canvas.width, h = w/aspectRatio;
+  if(h >= canvas.height)
+    h = canvas.height, w = h*aspectRatio;
+
+  x = (canvas.width-w) >> 1;
+  y = (canvas.height-h) >> 1;	
+
   return {x, y, w, h};
 }
 

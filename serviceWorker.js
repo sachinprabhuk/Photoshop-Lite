@@ -1,4 +1,4 @@
-const cache_name = "photoshop-lite-cache-v10";
+const cache_name = "photoshop-lite-cache-v11";
 
 self.addEventListener("install", e => {
   e.waitUntil(
