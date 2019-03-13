@@ -17,21 +17,26 @@ body, html {
 }
 
 #appWrapper {
+  box-sizing: border-box;
   padding: 10px 20px;
   display: grid;
-  grid-template-columns: 980px auto;
+  grid-template-columns: minmax(980px, 72%) auto;
   grid-column-gap: 25px;
+  height: 100vh;
 }
 
 canvas {
   display: block;
   background-color: white;
   box-shadow: 1px 4px 10px #ddd;
+  width: 100%;
+  height: 100%;
 }
 
 div#canvasDiv {
   position: relative;
   align-self: center;
+  height: 100%;
 }
 
 #editDiv > #main {

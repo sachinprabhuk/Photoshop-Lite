@@ -64,16 +64,16 @@
         Math.random() * 10
       ) + 1}.png)`;
 
-      if (navigator.serviceWorker) {
-        navigator.serviceWorker
-          .register("/serviceWorker.js")
-          .then(reg => {
-            console.log("This app is powered by service workers!");
-          })
-          .catch(err => {
-            console.warn("Something went wrong with service workers!");
-          });
-      }
+      // if (navigator.serviceWorker) {
+      //   navigator.serviceWorker
+      //     .register("/serviceWorker.js")
+      //     .then(reg => {
+      //       console.log("This app is powered by service workers!");
+      //     })
+      //     .catch(err => {
+      //       console.warn("Something went wrong with service workers!");
+      //     });
+      // }
     };
   </script>
 </html>
