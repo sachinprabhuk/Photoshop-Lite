@@ -74,7 +74,9 @@ const controls = {
     },
     dilation: {
       node: document.querySelector("input#dilation"),
-      worker: null
+    },
+    b_extration: {
+      node: document.querySelector("input#b_extraction") 
     }
   }
 };
@@ -123,6 +125,8 @@ controls.morphological.erosion.node.reset = genericReset;
 controls.morphological.dilation.node.reset = genericReset;
 controls.morphological.erosion.node.activate = genericActivate;
 controls.morphological.dilation.node.activate = genericActivate;
+controls.morphological.b_extration.node.activate = genericActivate;
+controls.morphological.b_extration.node.reset = genericReset;
 
 // default reset and acivate for all edge detection elements
 

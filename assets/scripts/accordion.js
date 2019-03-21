@@ -3,7 +3,8 @@ const accHeads = document.querySelectorAll("ul li .head");
 const handleClick = (() => {
 	let lastActiveNode = null;
 	return e => {	
-		const body = e.target.parentNode.querySelector(".body");
+		const body = e.target.parentNode.querySelector(".body")
+		|| e.target.parentNode.parentNode.querySelector(".body");
 		if(body === lastActiveNode) {
 			body.classList.remove("active");
 			lastActiveNode = null;

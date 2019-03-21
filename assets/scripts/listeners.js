@@ -262,3 +262,5 @@ function morpho() {
 controls.morphological.erosion.node.addEventListener("change", morpho);
 
 controls.morphological.dilation.node.addEventListener("change", morpho);
+
+controls.morphological.b_extration.node.addEventListener("change", morpho);

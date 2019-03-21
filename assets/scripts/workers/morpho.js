@@ -43,7 +43,7 @@ this.onmessage = function({ data: { imgData, size, op } }) {
   const s = size >> 1;
   const se = getSE(size);
   let pp;
-  if (op === "erosion")
+  if (op === "erosion") {
     for (let row = s; row < height - s; ++row) {
       for (let col = s; col < width - s; ++col) {
         pp = getPixelPos(row, col, width);
@@ -51,6 +51,17 @@ this.onmessage = function({ data: { imgData, size, op } }) {
           erosionVal(pixels, row - s, col - s, se, size, width);
       }
     }
+  }else if(op === "b_extraction") {
+    for (let row = s; row < height - s; ++row) {
+      for (let col = s; col < width - s; ++col) {
+        pp = getPixelPos(row, col, width);
+        newPixels[pp] = newPixels[pp + 1] = newPixels[pp + 2] = (
+          pixels[pp] 
+          - erosionVal(pixels, row - s, col - s, se, size, width)
+        )
+      }
+    }
+  }
   else
     for (let row = s; row < height - s; ++row) {
       for (let col = s; col < width - s; ++col) {

@@ -125,6 +125,12 @@ ul li .head {
   cursor: pointer;
 }
 
+ul li .head p {
+  font-size: 12px;
+  margin: 0px;
+  padding: 0px;
+}
+
 ul li .body {
 	overflow: hidden;
 	box-sizing: border-box;

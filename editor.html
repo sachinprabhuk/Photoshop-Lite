@@ -150,6 +150,7 @@
         <li>
           <div class="head">
             Segmentation
+            <p>(Suitable for gray scale images only.)</p>
           </div>
           <div class="body">
             <div class="body_inner">
@@ -176,6 +177,7 @@
         <li>
           <div class="head">
             Morphological Processing
+            <p>(Suitable for binary images only.)</p>
           </div>
           <div class="body">
             <div class="body_inner">
@@ -188,6 +190,11 @@
               <div class="feature">
                 <h3 class="name">Dilation</h3>
                 <input type="range" class="slider disabled" id="dilation"
+                min="0" max="3" value="0" disabled>
+              </div>
+              <div class="feature">
+                <h3 class="name">Border extraction</h3>
+                <input type="range" class="slider disabled" id="b_extraction"
                 min="0" max="3" value="0" disabled>
               </div>
 
