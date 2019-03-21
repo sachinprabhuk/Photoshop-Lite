@@ -12,6 +12,8 @@ let lastUsedElement = null;
 
 const edgeWorker = new Worker("/assets/scripts/workers/edge.js");
 const allowPlaneWorker = new Worker("/assets/scripts/workers/allowOnly.js");
+const morphoWorker =  new Worker("/assets/scripts/workers/morpho.js")
+
 const controls = {
   basic: {
     brightSlider: {
@@ -65,6 +67,15 @@ const controls = {
       node: document.querySelector("input[type=checkbox]#thresh"),
       worker: new Worker("/assets/scripts/workers/toBinaryImage.js")
     }
+  },
+  morphological: {
+    erosion: {
+      node: document.querySelector("input#erosion"),
+    },
+    dilation: {
+      node: document.querySelector("input#dilation"),
+      worker: null
+    }
   }
 };
 
@@ -89,23 +100,29 @@ controls.segmentation.thresholding.node.activate = function() {
   this.disabled = false;
 };
 
-function cbActivate() {
+function genericActivate() {
   this.disabled = false;
   this.classList.remove("disabled");
+}
+function genericReset() {
+  this.value = this.min || 0;
 }
 
 controls.basic.brightSlider.node.reset = function() {
   this.value = 0;
 };
-controls.basic.brightSlider.node.activate = cbActivate;
+controls.basic.brightSlider.node.activate = genericActivate;
 
-controls.basic.contrast.node.reset = function() {this.value = 0;}
-controls.basic.contrast.node.activate = cbActivate
+controls.basic.contrast.node.reset = genericReset;
+controls.basic.contrast.node.activate = genericActivate
 
-controls.basic.blurSlider.node.reset = function() {
-  this.value = this.min;
-};
-controls.basic.blurSlider.node.activate = cbActivate;
+controls.basic.blurSlider.node.reset = genericReset;
+controls.basic.blurSlider.node.activate = genericActivate;
+
+controls.morphological.erosion.node.reset = genericReset;
+controls.morphological.dilation.node.reset = genericReset;
+controls.morphological.erosion.node.activate = genericActivate;
+controls.morphological.dilation.node.activate = genericActivate;
 
 // default reset and acivate for all edge detection elements
 

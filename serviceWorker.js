@@ -1,4 +1,4 @@
-const cache_name = "photoshop-lite-cache-v11";
+const cache_name = "photoshop-lite-cache-v12";
 
 self.addEventListener("install", e => {
   e.waitUntil(
@@ -20,10 +20,11 @@ self.addEventListener("install", e => {
           "/assets/scripts/workers/invert.js",
           "/assets/scripts/workers/allowOnly.js",
           "/assets/scripts/workers/toBinaryImage.js",
+          "/assets/scripts/workers/morpho.js",
           "/assets/scripts/index.js",
           "/assets/scripts/accordion.js",
           "/assets/scripts/listeners.js",
-          "/assets/scripts/toast.js"
+          "/assets/scripts/toast.js",
         ]);
       })
       .catch(err => {

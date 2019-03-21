@@ -234,3 +234,31 @@ threshForm.addEventListener("submit", function(e) {
     threshold: Number.parseInt(threshInput.value)
   });
 });
+
+/*
+  Morphological
+*/
+
+function morpho() {
+  lastUsedElement && lastUsedElement !== this && lastUsedElement.reset();
+  lastUsedElement = this;
+
+  if(this.value == 0) {
+    ctx.putImageData(imageData, imgPos.x, imgPos.y);
+    return;
+  }
+  const seSize = 2*this.value + 1;
+  morphoWorker.onmessage = function({ data }) {
+    ctx.putImageData(data, imgPos.x, imgPos.y);
+  }
+
+  morphoWorker.postMessage({
+    imgData: imageData,
+    size: seSize,
+    op: this.getAttribute("id")
+  });
+}
+
+controls.morphological.erosion.node.addEventListener("change", morpho);
+
+controls.morphological.dilation.node.addEventListener("change", morpho);
