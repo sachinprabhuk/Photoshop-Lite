@@ -2,7 +2,7 @@ const getPixelPos = (x, y, width) => {
   return (y*width + x)*4;
 }
 
-this.onmessage = function({ data: { imgData, kernel } }) {
+this.onmessage = function({ data: { imgData, size } }) {
   const { width, height } = imgData;
   const newImgData = new ImageData(
     new Uint8ClampedArray(imgData.data),
@@ -11,8 +11,7 @@ this.onmessage = function({ data: { imgData, kernel } }) {
   
   const pixels = newImgData.data;
   const originalPixels = imgData.data;
-  const klen = kernel[0].length;
-  const s = klen >> 1;
+  const s = size >> 1;
   let i, _r, _g, _b;
 
   for(let row=s;row<(height-s);++row) {
@@ -23,17 +22,15 @@ this.onmessage = function({ data: { imgData, kernel } }) {
       for(let r=row-s, m = 0;r<=(row+s);++r, ++m)
         for(let c=col-s, n = 0;c<=(col+s);++c, ++n) {
           temp = getPixelPos(c, r, width);
-          _r += (kernel[m][n]*originalPixels[temp]);
-          _g += (kernel[m][n]*originalPixels[temp+1]);
-          _b += (kernel[m][n]*originalPixels[temp+2]);
+          _r += originalPixels[temp];
+          _g += originalPixels[temp+1];
+          _b += originalPixels[temp+2];
         }
       
-      pixels[i] = _r/(klen**2);
-      pixels[i+1] = _g/(klen**2);
-      pixels[i+2] = _b/(klen**2);
-      // pixels[i+3] = 255;
+      pixels[i] = _r/(size*size);
+      pixels[i+1] = _g/(size*size);
+      pixels[i+2] = _b/(size*size);
     }
   }
-
   this.postMessage(newImgData);
 }

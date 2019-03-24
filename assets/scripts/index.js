@@ -2,7 +2,7 @@ const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
 canvas.width = canvas.clientWidth;
-canvas.height = canvas.clientHeight;
+canvas.height = canvas.parentNode.clientHeight;
 
 // These variables are most important global vars
 let imgPos = null;
@@ -21,7 +21,7 @@ const controls = {
       worker: new Worker("/assets/scripts/workers/brightness.js")
     },
     blurSlider: {
-      node: document.querySelector("input#_blur"),
+      node: document.querySelector("input#blurSlider"),
       worker: new Worker("/assets/scripts/workers/blur.js")
     },
     contrast: {

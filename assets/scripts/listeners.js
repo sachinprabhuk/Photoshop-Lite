@@ -107,10 +107,7 @@ controls.basic.blurSlider.node.addEventListener("change", function(e) {
   worker.onmessage = function({ data }) {
     ctx.putImageData(data, imgPos.x, imgPos.y);
   };
-  worker.postMessage({
-    imgData: imageData,
-    kernel: Array(blurVal).fill(Array(blurVal).fill(1))
-  });
+  worker.postMessage({ imgData: imageData, size: blurVal });
 });
 
 /*
