@@ -115,7 +115,9 @@ controls.basic.brightSlider.node.reset = function() {
 };
 controls.basic.brightSlider.node.activate = genericActivate;
 
-controls.basic.contrast.node.reset = genericReset;
+controls.basic.contrast.node.reset = function() {
+  this.value = 0;
+};
 controls.basic.contrast.node.activate = genericActivate
 
 controls.basic.blurSlider.node.reset = genericReset;
